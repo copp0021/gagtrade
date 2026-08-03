@@ -1,9 +1,10 @@
 -- ============================================
--- AUTO MAIL SYSTEM V4 (Custom Icons Mapped)
+-- AUTO MAIL SYSTEM V4 (Mobile Responsive & Fixed Frame Error)
 -- ============================================
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UserInputService = game:GetService("UserInputService")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
@@ -244,7 +245,7 @@ function SearchPlayerGlobal(username)
 end
 
 -- ============================================
--- 🎨 UI CREATION
+-- 🎨 UI CREATION (Mobile Responsive)
 -- ============================================
 local screenGuiName = "AutoMailSystemUI"
 if playerGui:FindFirstChild(screenGuiName) then
@@ -257,8 +258,9 @@ ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = playerGui
 
 local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 480, 0, 540)
-MainFrame.Position = UDim2.new(0.5, -240, 0.5, -270)
+MainFrame.Size = UDim2.new(0, 420, 0, 480)
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 MainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
 MainFrame.BorderSizePixel = 0
 MainFrame.Parent = ScreenGui
@@ -276,19 +278,19 @@ TopBar.BackgroundTransparency = 1
 TopBar.Parent = MainFrame
 
 local TitleLabel = Instance.new("TextLabel")
-TitleLabel.Size = UDim2.new(1, -20, 1, 0)
-TitleLabel.Position = UDim2.new(0, 15, 0, 0)
+TitleLabel.Size = UDim2.new(1, -50, 1, 0)
+TitleLabel.Position = UDim2.new(0, 12, 0, 0)
 TitleLabel.BackgroundTransparency = 1
 TitleLabel.Font = Enum.Font.GothamBold
-TitleLabel.Text = "⚡ AUTO MAIL SYSTEM V4 (Mapped Icons)"
+TitleLabel.Text = "⚡ AUTO MAIL V4 (Mobile)"
 TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TitleLabel.TextSize = 14
 TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
 TitleLabel.Parent = TopBar
 
 local CloseBtn = Instance.new("TextButton")
-CloseBtn.Size = UDim2.new(0, 30, 0, 30)
-CloseBtn.Position = UDim2.new(1, -35, 0.5, -15)
+CloseBtn.Size = UDim2.new(0, 32, 0, 32)
+CloseBtn.Position = UDim2.new(1, -38, 0.5, -16)
 CloseBtn.BackgroundColor3 = Color3.fromRGB(230, 60, 60)
 CloseBtn.Font = Enum.Font.GothamBold
 CloseBtn.Text = "X"
@@ -300,29 +302,30 @@ CloseBtn.MouseButton1Click:Connect(function() ScreenGui:Destroy() end)
 
 -- Content Frame
 local Content = Instance.new("ScrollingFrame")
-Content.Size = UDim2.new(1, -20, 1, -60)
-Content.Position = UDim2.new(0, 10, 0, 50)
+Content.Size = UDim2.new(1, -16, 1, -55)
+Content.Position = UDim2.new(0, 8, 0, 48)
 Content.BackgroundTransparency = 1
-Content.CanvasSize = UDim2.new(0, 0, 0, 680)
+Content.CanvasSize = UDim2.new(0, 0, 0, 600)
 Content.ScrollBarThickness = 4
 Content.Parent = MainFrame
 
 local UIListLayout = Instance.new("UIListLayout")
 UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0, 12)
+UIListLayout.Padding = UDim.new(0, 10)
 UIListLayout.Parent = Content
 
 local function createBox(placeholder)
     local box = Instance.new("TextBox")
-    box.Size = UDim2.new(1, 0, 0, 42)
+    box.Size = UDim2.new(1, 0, 0, 40)
     box.BackgroundColor3 = Color3.fromRGB(28, 28, 38)
     box.Font = Enum.Font.GothamMedium
     box.PlaceholderText = placeholder
     box.PlaceholderColor3 = Color3.fromRGB(120, 120, 140)
     box.Text = ""
     box.TextColor3 = Color3.fromRGB(255, 255, 255)
-    box.TextSize = 14
+    box.TextSize = 13
+    box.ClearTextOnFocus = false
     Instance.new("UICorner", box).CornerRadius = UDim.new(0, 8)
     local stroke = Instance.new("UIStroke", box)
     stroke.Color = Color3.fromRGB(45, 45, 60)
@@ -332,12 +335,12 @@ end
 
 local function createLabel(text)
     local label = Instance.new("TextLabel")
-    label.Size = UDim2.new(1, 0, 0, 20)
+    label.Size = UDim2.new(1, 0, 0, 18)
     label.BackgroundTransparency = 1
     label.Font = Enum.Font.GothamBold
     label.Text = text
     label.TextColor3 = Color3.fromRGB(180, 180, 200)
-    label.TextSize = 13
+    label.TextSize = 12
     label.TextXAlignment = Enum.TextXAlignment.Left
     return label
 end
@@ -348,12 +351,12 @@ TargetBox.Parent = Content
 
 createLabel("เลือกไอเทมจากกระเป๋า:").Parent = Content
 local SelectItemBtn = Instance.new("TextButton")
-SelectItemBtn.Size = UDim2.new(1, 0, 0, 42)
+SelectItemBtn.Size = UDim2.new(1, 0, 0, 40)
 SelectItemBtn.BackgroundColor3 = Color3.fromRGB(28, 28, 38)
 SelectItemBtn.Font = Enum.Font.GothamMedium
 SelectItemBtn.Text = "📦 คลิกเพื่อเลือกไอเทมในกระเป๋า..."
 SelectItemBtn.TextColor3 = Color3.fromRGB(180, 180, 200)
-SelectItemBtn.TextSize = 14
+SelectItemBtn.TextSize = 13
 SelectItemBtn.Parent = Content
 Instance.new("UICorner", SelectItemBtn).CornerRadius = UDim.new(0, 8)
 local SelectItemStroke = Instance.new("UIStroke", SelectItemBtn)
@@ -369,29 +372,29 @@ local NoteBox = createBox("พิมพ์ข้อความถึงผู�
 NoteBox.Parent = Content
 
 local StatusBox = Instance.new("TextLabel")
-StatusBox.Size = UDim2.new(1, 0, 0, 80)
+StatusBox.Size = UDim2.new(1, 0, 0, 75)
 StatusBox.BackgroundColor3 = Color3.fromRGB(14, 14, 20)
 StatusBox.Font = Enum.Font.Code
 StatusBox.Text = "📌 สถานะ: พร้อมเลือกไอเทมจากกระเป๋า"
 StatusBox.TextColor3 = Color3.fromRGB(100, 220, 100)
-StatusBox.TextSize = 12
+StatusBox.TextSize = 11
 StatusBox.TextWrapped = true
 StatusBox.TextXAlignment = Enum.TextXAlignment.Left
 StatusBox.TextYAlignment = Enum.TextYAlignment.Top
 StatusBox.Parent = Content
 Instance.new("UICorner", StatusBox).CornerRadius = UDim.new(0, 8)
 local StatusPadding = Instance.new("UIPadding", StatusBox)
-StatusPadding.PaddingTop = UDim.new(0, 8)
-StatusPadding.PaddingLeft = UDim.new(0, 8)
-StatusPadding.PaddingRight = UDim.new(0, 8)
+StatusPadding.PaddingTop = UDim.new(0, 6)
+StatusPadding.PaddingLeft = UDim.new(0, 6)
+StatusPadding.PaddingRight = UDim.new(0, 6)
 
 local SendBtn = Instance.new("TextButton")
-SendBtn.Size = UDim2.new(1, 0, 0, 48)
+SendBtn.Size = UDim2.new(1, 0, 0, 45)
 SendBtn.BackgroundColor3 = Color3.fromRGB(50, 140, 255)
 SendBtn.Font = Enum.Font.GothamBold
 SendBtn.Text = "🚀 เริ่มต้นส่งไอเทม"
 SendBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-SendBtn.TextSize = 16
+SendBtn.TextSize = 15
 SendBtn.Parent = Content
 Instance.new("UICorner", SendBtn).CornerRadius = UDim.new(0, 8)
 
@@ -407,8 +410,9 @@ PickerModal.ZIndex = 10
 PickerModal.Parent = MainFrame
 
 local PickerContainer = Instance.new("Frame")
-PickerContainer.Size = UDim2.new(0, 400, 0, 440)
-PickerContainer.Position = UDim2.new(0.5, -200, 0.5, -220)
+PickerContainer.Size = UDim2.new(0, 360, 0, 400)
+PickerContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
+PickerContainer.AnchorPoint = Vector2.new(0.5, 0.5)
 PickerContainer.BackgroundColor3 = Color3.fromRGB(22, 22, 30)
 PickerContainer.ZIndex = 11
 PickerContainer.Parent = PickerModal
@@ -418,32 +422,32 @@ PickerStroke.Color = Color3.fromRGB(70, 70, 100)
 PickerStroke.Thickness = 1.5
 
 local PickerTitle = Instance.new("TextLabel")
-PickerTitle.Size = UDim2.new(1, -20, 0, 40)
-PickerTitle.Position = UDim2.new(0, 15, 0, 5)
+PickerTitle.Size = UDim2.new(1, -40, 0, 35)
+PickerTitle.Position = UDim2.new(0, 12, 0, 5)
 PickerTitle.BackgroundTransparency = 1
 PickerTitle.ZIndex = 11
 PickerTitle.Font = Enum.Font.GothamBold
-PickerTitle.Text = "🎒 เลือกไอเทมจากกระเป๋าของคุณ"
+PickerTitle.Text = "🎒 เลือกไอเทมในกระเป๋า"
 PickerTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-PickerTitle.TextSize = 15
+PickerTitle.TextSize = 14
 PickerTitle.TextXAlignment = Enum.TextXAlignment.Left
 PickerTitle.Parent = PickerContainer
 
 local ClosePickerBtn = Instance.new("TextButton")
 ClosePickerBtn.Size = UDim2.new(0, 28, 0, 28)
-ClosePickerBtn.Position = UDim2.new(1, -33, 0, 10)
+ClosePickerBtn.Position = UDim2.new(1, -32, 0, 8)
 ClosePickerBtn.BackgroundColor3 = Color3.fromRGB(230, 60, 60)
 ClosePickerBtn.ZIndex = 12
 ClosePickerBtn.Font = Enum.Font.GothamBold
 ClosePickerBtn.Text = "X"
 ClosePickerBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-ClosePickerBtn.TextSize = 13
+ClosePickerBtn.TextSize = 12
 ClosePickerBtn.Parent = PickerContainer
 Instance.new("UICorner", ClosePickerBtn).CornerRadius = UDim.new(0, 6)
 
 local SearchItemBox = Instance.new("TextBox")
-SearchItemBox.Size = UDim2.new(1, -30, 0, 36)
-SearchItemBox.Position = UDim2.new(0, 15, 0, 50)
+SearchItemBox.Size = UDim2.new(1, -24, 0, 34)
+SearchItemBox.Position = UDim2.new(0, 12, 0, 42)
 SearchItemBox.BackgroundColor3 = Color3.fromRGB(30, 30, 42)
 SearchItemBox.ZIndex = 11
 SearchItemBox.Font = Enum.Font.GothamMedium
@@ -451,13 +455,13 @@ SearchItemBox.PlaceholderText = "🔍 ค้นหาชื่อไอเทม
 SearchItemBox.PlaceholderColor3 = Color3.fromRGB(120, 120, 140)
 SearchItemBox.Text = ""
 SearchItemBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-SearchItemBox.TextSize = 13
+SearchItemBox.TextSize = 12
 SearchItemBox.Parent = PickerContainer
 Instance.new("UICorner", SearchItemBox).CornerRadius = UDim.new(0, 6)
 
 local ItemScroll = Instance.new("ScrollingFrame")
-ItemScroll.Size = UDim2.new(1, -30, 1, -105)
-ItemScroll.Position = UDim2.new(0, 15, 0, 95)
+ItemScroll.Size = UDim2.new(1, -24, 1, -90)
+ItemScroll.Position = UDim2.new(0, 12, 0, 82)
 ItemScroll.BackgroundTransparency = 1
 ItemScroll.ZIndex = 11
 ItemScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
@@ -486,7 +490,7 @@ local function PopulateInventoryList(filterText)
             countAdded = countAdded + 1
             
             local btn = Instance.new("TextButton")
-            btn.Size = UDim2.new(1, 0, 0, 45)
+            btn.Size = UDim2.new(1, 0, 0, 42)
             btn.BackgroundColor3 = Color3.fromRGB(28, 28, 38)
             btn.ZIndex = 12
             btn.AutoButtonColor = true
@@ -495,8 +499,8 @@ local function PopulateInventoryList(filterText)
             Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
             
             local icon = Instance.new("ImageLabel")
-            icon.Size = UDim2.new(0, 35, 0, 35)
-            icon.Position = UDim2.new(0, 5, 0.5, -17.5)
+            icon.Size = UDim2.new(0, 32, 0, 32)
+            icon.Position = UDim2.new(0, 5, 0.5, -16)
             icon.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
             icon.ZIndex = 13
             icon.Image = item.Image or ""
@@ -504,28 +508,28 @@ local function PopulateInventoryList(filterText)
             Instance.new("UICorner", icon).CornerRadius = UDim.new(0, 4)
             
             local textLabel = Instance.new("TextLabel")
-            textLabel.Size = UDim2.new(1, -50, 1, 0)
-            textLabel.Position = UDim2.new(0, 48, 0, 0)
+            textLabel.Size = UDim2.new(1, -45, 1, 0)
+            textLabel.Position = UDim2.new(0, 44, 0, 0)
             textLabel.BackgroundTransparency = 1
             textLabel.ZIndex = 13
             textLabel.Font = Enum.Font.GothamMedium
-            textLabel.Text = string.format("%s  (มี: %d ชิ้น)", itemName, item.Count)
+            textLabel.Text = string.format("%s (มี: %d)", itemName, item.Count)
             textLabel.TextColor3 = Color3.fromRGB(230, 230, 255)
-            textLabel.TextSize = 13
+            textLabel.TextSize = 12
             textLabel.TextXAlignment = Enum.TextXAlignment.Left
             textLabel.Parent = btn
             
             btn.MouseButton1Click:Connect(function()
                 selectedItemKey = item.ItemKey
                 selectedCategory = item.Category
-                SelectItemBtn.Text = string.format("✅ เลือก: %s (มี %d ชิ้น)", itemName, item.Count)
+                SelectItemBtn.Text = string.format("✅ เลือก: %s (%d)", itemName, item.Count)
                 SelectItemBtn.TextColor3 = Color3.fromRGB(100, 250, 100)
                 PickerModal.Visible = false
             end)
         end
     end
     
-    ItemScroll.CanvasSize = UDim2.new(0, 0, 0, countAdded * 51)
+    ItemScroll.CanvasSize = UDim2.new(0, 0, 0, countAdded * 48)
 end
 
 SelectItemBtn.MouseButton1Click:Connect(function()
@@ -546,7 +550,7 @@ end)
 -- ============================================
 SendBtn.MouseButton1Click:Connect(function()
     if isSending then
-        StatusBox.Text = "⚠️ กำลังดำเนินการส่งชุดอื่นอยู่ กรุณารอสักครู่..."
+        StatusBox.Text = "⚠️ กำลังดำเนินการส่งชุดอื่นอยู่..."
         return
     end
 
@@ -555,24 +559,24 @@ SendBtn.MouseButton1Click:Connect(function()
     local note = NoteBox.Text
 
     if username == "" or not selectedItemKey then
-        StatusBox.Text = "❌ กรุณากรอกชื่อผู้รับและเลือกไอเทมจากกระเป๋าให้เรียบร้อย"
+        StatusBox.Text = "❌ กรุณากรอกชื่อผู้รับและเลือกไอเทม"
         return
     end
 
     SendBtn.BackgroundColor3 = Color3.fromRGB(100, 100, 120)
     SendBtn.Text = "⏳ กำลังค้นหาข้อมูลผู้เล่น..."
-    StatusBox.Text = "🔍 กำลังค้นหา UserID ของ: " .. username
+    StatusBox.Text = "🔍 กำลังค้นหา UserID: " .. username
 
     task.spawn(function()
         local playerData = SearchPlayerGlobal(username)
         if not playerData then
-            StatusBox.Text = "❌ ไม่พบผู้เล่นชื่อ: " .. username
+            StatusBox.Text = "❌ ไม่พบผู้เล่น: " .. username
             SendBtn.BackgroundColor3 = Color3.fromRGB(50, 140, 255)
             SendBtn.Text = "🚀 เริ่มต้นส่งไอเทม"
             return
         end
 
-        StatusBox.Text = string.format("✅ พบผู้เล่น: %s (ID: %d)\n📦 กำลังส่งไอเทม...", playerData.Name, playerData.UserId)
+        StatusBox.Text = string.format("✅ พบผู้เล่น: %s\n📦 กำลังส่ง...", playerData.Name)
 
         local result = SendItemAuto(
             playerData.UserId,
@@ -580,11 +584,11 @@ SendBtn.MouseButton1Click:Connect(function()
             amount,
             note,
             function(batchIndex, totalBatches, batchAmount)
-                StatusBox.Text = string.format("⏳ กำลังส่ง... รอบที่ %d/%d (จำนวน %d ชิ้น)", batchIndex, totalBatches, batchAmount)
+                StatusBox.Text = string.format("⏳ ส่งรอบที่ %d/%d (%d ชิ้น)", batchIndex, totalBatches, batchAmount)
             end
         )
 
-        StatusBox.Text = string.format("✨ ผลลัพธ์: %s\n📦 ส่งไป: %d / มีทั้งหมด: %d ชิ้น\n🔄 สำเร็จ: %d รอบ | ล้มเหลว: %d รอบ",
+        StatusBox.Text = string.format("✨ %s\n📦 ส่งไป: %d / มีทั้งหมด: %d\n🔄 สำเร็จ %d รอบ | ล้มเหลว %d รอบ",
             result.message, result.sent, result.have, result.successRounds, result.failRounds)
         
         SendBtn.BackgroundColor3 = Color3.fromRGB(50, 140, 255)
@@ -592,4 +596,41 @@ SendBtn.MouseButton1Click:Connect(function()
     end)
 end)
 
-print("✅ Auto Mail V4 (Mapped Icons) โหลดสำเร็จและพร้อมใช้งาน!")
+-- ============================================
+-- 📱 DRAGGABLE UI SUPPORT (รองรับการลากหน้าจอในมือถือ)
+-- ============================================
+local dragging, dragInput, dragStart, startPos
+
+MainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+MainFrame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        local delta = input.Position - dragStart
+        MainFrame.Position = UDim2.new(
+            startPos.X.Scale, 
+            startPos.X.Offset + delta.X, 
+            startPos.Y.Scale, 
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+print("✅ Auto Mail V4 (Fixed & Mobile Ready) โหลดสำเร็จ!")
